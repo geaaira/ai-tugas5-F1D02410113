@@ -1,0 +1,19 @@
+{
+  "judul": "Sistem Pakar Kondisi Tanaman dan Buah Nanas",
+  "batas": "Pengetahuan dalam sistem ini diambil dari dua makalah ilmiah: Pratama dkk. (S1) tentang diagnosis penyakit tanaman nanas dengan Certainty Factor, dan Purba dkk. (S2) tentang klasifikasi kematangan buah nanas dengan CNN. Sistem hanya dipakai untuk tiga penyakit (Fusariosis, Busuk Akar, Busuk Pangkal) dan tiga tingkat kematangan buah menurut warna kulit (mentah, matang, ranum). Penyakit atau hama lain serta kondisi buah busuk, manis, atau segar tidak tercakup. Nilai CF berasal dari bobot pakar (S1) dan akurasi per kelas (S2) yang dilaporkan penulis makalah, bukan hasil validasi sendiri. Hasilnya saran awal, bukan keputusan akhir; konfirmasikan ke penyuluh pertanian atau ahli.",
+  "sumber": {
+    "S1": "Penerapan Metode Certainty Factor untuk Diagnosa Penyakit Tanaman Nanas, Pratama, Saputri, Saprudin, STMIK Dharma Wacana (Metro), https://e-jurnal.dharmawacana.ac.id/index.php/ir/article/download/140/pdf, diakses 12 Nov 2026",
+    "S2": "Perancangan Alat Pendeteksi Kematangan Buah Nanas dengan Menggunakan Mikrokontroler dengan Metode CNN, Purba dkk., Methotika: Jurnal Ilmiah Teknik Informatika Vol. 2 No. 1 (April 2022) hlm. 13-21, Fakultas Ilmu Komputer Universitas Methodist Indonesia, http://ojs.fikom-methodist.net/index.php/METHOTIKA, diakses 12 Nov 2026"
+  },
+  "aturan": [
+    {"id": "R1", "jika": ["ujung batang bengkok atau mati"], "mode": "dan", "maka": "Fusariosis", "cf": 1.0, "sumber": "S1", "rujukan": "Tabel 1 (G01) dan Tabel 3"},
+    {"id": "R2", "jika": ["tanaman kerdil dan daun klorotik"], "mode": "dan", "maka": "Fusariosis", "cf": 1.0, "sumber": "S1", "rujukan": "Tabel 1 (G02) dan Tabel 3"},
+    {"id": "R3", "jika": ["pertumbuhan buah tertunda atau tidak berbuah sama sekali"], "mode": "dan", "maka": "Busuk Akar", "cf": 0.6, "sumber": "S1", "rujukan": "Tabel 1 (G03) dan Tabel 3"},
+    {"id": "R4", "jika": ["akar rusak dan tanaman kerdil"], "mode": "dan", "maka": "Busuk Akar", "cf": 0.8, "sumber": "S1", "rujukan": "Tabel 1 (G04) dan Tabel 3"},
+    {"id": "R5", "jika": ["daun muda mudah dicabut karena pangkal busuk"], "mode": "dan", "maka": "Busuk Pangkal", "cf": 0.6, "sumber": "S1", "rujukan": "Tabel 1 (G05) dan Tabel 3"},
+    {"id": "R6", "jika": ["buah berada pada jarak 30 cm dari sensor", "kualitas gambar kulit buah baik"], "mode": "dan", "maka": "pengambilan gambar valid", "cf": 1.0, "sumber": "S2", "rujukan": "Gambar 7 (diagram alir, syarat jarak 30 cm) dan Kesimpulan butir 2 (jarak dan kualitas gambar memengaruhi deteksi)"},
+    {"id": "R7", "jika": ["kulit buah hijau gelap", "pengambilan gambar valid"], "mode": "dan", "maka": "buah mentah", "cf": 0.84, "sumber": "S2", "rujukan": "Bagian 2.4 (contoh buah mentah) dan Tabel 2 (akurasi kelas mentah 42/50)"},
+    {"id": "R8", "jika": ["kulit buah kuning kehijauan", "pengambilan gambar valid"], "mode": "dan", "maka": "buah matang", "cf": 0.80, "sumber": "S2", "rujukan": "Bagian 2.4 (contoh buah matang) dan Tabel 2 (akurasi kelas matang 40/50)"},
+    {"id": "R9", "jika": ["kulit buah oranye", "pengambilan gambar valid"], "mode": "dan", "maka": "buah ranum", "cf": 0.86, "sumber": "S2", "rujukan": "Bagian 2.4 (contoh buah ranum) dan Tabel 2 (akurasi kelas ranum 43/50)"}
+  ]
+}
